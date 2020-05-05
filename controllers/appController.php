@@ -8,11 +8,7 @@ class appController extends Controller
     protected $content;
 
     public function actionIndex(){
-        $date = date('d/m/Y');
-        $this->actionDate($date);
-    }
-
-    public function actionDate($date){
+        $date = isset($_GET['date']) && !empty($_GET['date']) ? date('d/m/Y', strtotime($_GET['date'])) : date('d/m/Y');
         $model = new Currency($date);
         $yesterday = date('d/m/Y', strtotime(str_replace('/', '-', $date)) - 60 * 60 * 24);
         $old_model = new Currency($yesterday);
@@ -25,6 +21,7 @@ class appController extends Controller
         ]);
         echo $this->render();
     }
+
 
     protected function render(){
         return $this->template('layout/main', ['content' => $this->content]);

@@ -18,6 +18,5 @@ class Currency
         $array = json_decode($json,TRUE);
         $this->USD = floatval(str_replace(',', '.', $array['Valute'][10]['Value']));
         $this->EUR = floatval(str_replace(',', '.', $array['Valute'][11]['Value']));
-
     }
 }
